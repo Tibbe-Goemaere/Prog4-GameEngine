@@ -9,6 +9,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include <chrono>
 
 SDL_Window* g_window{};
 
@@ -83,12 +84,17 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 
+	auto lastTime = std::chrono::high_resolution_clock::now();
 	// todo: this update loop could use some work.
 	bool doContinue = true;
 	while (doContinue)
 	{
+		const auto currentTime = std::chrono::high_resolution_clock::now();
+		const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
 		renderer.Render();
+		lastTime = currentTime;
 	}
 }
