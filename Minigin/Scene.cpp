@@ -24,11 +24,11 @@ void Scene::RemoveAll()
 	m_objects.clear();
 }
 
-void Scene::Update()
+void Scene::Update(const float dt)
 {
 	for(auto& object : m_objects)
 	{
-		object->Update();
+		object->Update(dt);
 	}
 }
 

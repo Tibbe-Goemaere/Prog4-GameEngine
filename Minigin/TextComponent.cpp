@@ -1,15 +1,17 @@
 #include <stdexcept>
 #include <SDL_ttf.h>
-#include "TextObject.h"
+#include "TextComponent.h"
 #include "Renderer.h"
 #include "Font.h"
 #include "Texture2D.h"
 
-dae::TextObject::TextObject(const std::string& text, std::shared_ptr<Font> font) 
+dae::TextComponent::TextComponent(const std::string& text, std::shared_ptr<Font> font, float xPos, float yPos)
 	: m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_textTexture(nullptr)
-{ }
+{ 
+	m_transform.SetPosition(xPos,yPos,0.0f);
+}
 
-void dae::TextObject::Update()
+void dae::TextComponent::Update([[maybe_unused]] const float dt)
 {
 	if (m_needsUpdate)
 	{
@@ -30,7 +32,7 @@ void dae::TextObject::Update()
 	}
 }
 
-void dae::TextObject::Render() const
+void dae::TextComponent::Render() const
 {
 	if (m_textTexture != nullptr)
 	{
@@ -39,13 +41,18 @@ void dae::TextObject::Render() const
 	}
 }
 
-void dae::TextObject::SetText(const std::string& text)
+void dae::TextComponent::SetText(const std::string& text)
 {
 	m_text = text;
 	m_needsUpdate = true;
 }
 
-void dae::TextObject::SetPosition(const float x, const float y)
+void dae::TextComponent::SetFont(const std::shared_ptr<Font> font)
+{
+	m_font = font;
+}
+
+void dae::TextComponent::SetPosition(const float x, const float y)
 {
 	m_transform.SetPosition(x, y, 0.0f);
 }
