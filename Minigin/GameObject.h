@@ -19,6 +19,9 @@ namespace dae
 		void SetPosition(float x, float y);
 
 		void AddComponent(std::shared_ptr<BaseComponent> component);
+		void RemoveComponent(std::shared_ptr<BaseComponent> component);
+		std::shared_ptr<BaseComponent> GetComponent() const;
+		bool HasAddedComponent();
 
 		GameObject() = default;
 		virtual ~GameObject();
@@ -29,7 +32,6 @@ namespace dae
 
 	private:
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
-		
 		Transform m_transform{};
 		std::shared_ptr<Texture2D> m_texture{};
 	};
@@ -38,5 +40,27 @@ namespace dae
 	inline void GameObject::AddComponent(std::shared_ptr<BaseComponent> component)
 	{
 		m_pComponents.push_back(component);
+	}
+
+	inline void GameObject::RemoveComponent(std::shared_ptr<BaseComponent> component)
+	{
+		m_pComponents.erase(std::remove(m_pComponents.begin(), m_pComponents.end(), component));
+	}
+
+	inline std::shared_ptr<BaseComponent> GameObject::GetComponent() const
+	{
+		if (m_pComponents.size() >= 1)
+		{
+			return m_pComponents[0];
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
+
+	inline bool GameObject::HasAddedComponent()
+	{
+		return m_pComponents.size() >= 1;
 	}
 }
