@@ -90,8 +90,9 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	while (doContinue)
 	{
 		const auto currentTime = std::chrono::high_resolution_clock::now();
-		const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
-
+		//const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+		//const float fps = 1000.f / deltaTime;
+	
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
 		renderer.Render();

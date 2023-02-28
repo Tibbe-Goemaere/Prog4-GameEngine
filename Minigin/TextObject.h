@@ -3,17 +3,18 @@
 #include <memory>
 #include "GameObject.h"
 #include "Transform.h"
+#include "RenderComponent.h"
 
 namespace dae
 {
 	class Font;
 	class Texture2D;
-	class TextObject final : public GameObject
+	class TextObject final : public RenderComponent
 	{
 	public:
 		void Update() override;
 		void Render() const override;
-
+		
 		void SetText(const std::string& text);
 		void SetPosition(float x, float y);
 

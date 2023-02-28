@@ -39,7 +39,6 @@ void dae::TextObject::Render() const
 	}
 }
 
-// This implementation uses the "dirty flag" pattern
 void dae::TextObject::SetText(const std::string& text)
 {
 	m_text = text;

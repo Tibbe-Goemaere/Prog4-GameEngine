@@ -27,7 +27,7 @@ namespace dae
 		std::string m_name;
 		std::vector < std::shared_ptr<GameObject>> m_objects{};
 
-		static unsigned int m_idCounter; 
+		static unsigned int m_idCounter;
 	};
 
 }
