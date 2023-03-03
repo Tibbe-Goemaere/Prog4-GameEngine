@@ -11,7 +11,7 @@ dae::TextComponent::TextComponent(const std::string& text, std::shared_ptr<Font>
 	m_transform.SetPosition(xPos,yPos,0.0f);
 }
 
-void dae::TextComponent::Update([[maybe_unused]] const float dt)
+void dae::TextComponent::Update(const float)
 {
 	if (m_needsUpdate)
 	{

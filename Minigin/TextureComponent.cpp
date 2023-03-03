@@ -22,7 +22,7 @@ void dae::TextureComponent::Render() const
 	}
 }
 
-void dae::TextureComponent::Update([[maybe_unused]] const float dt)
+void dae::TextureComponent::Update(const float)
 {
 }
 
