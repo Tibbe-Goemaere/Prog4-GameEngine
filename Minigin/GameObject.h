@@ -15,16 +15,16 @@ namespace dae
 		virtual void Update(const float dt);
 		virtual void Render() const;
 
-		void SetTexture(const std::string& filename);
-		void SetPosition(float x, float y);
+		template<typename T> void AddComponent(std::shared_ptr<T> component);
 
-		void AddComponent(std::shared_ptr<BaseComponent> component);
-		void RemoveComponent(std::shared_ptr<BaseComponent> component);
-		std::shared_ptr<BaseComponent> GetComponent() const;
-		bool HasAddedComponent();
+		template<typename T> void RemoveComponent();
+
+		template<typename T> std::shared_ptr<T> GetComponent() const;
+
+		template<typename T> bool HasAddedComponent() const;
 
 		GameObject() = default;
-		~GameObject();
+		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
@@ -32,35 +32,57 @@ namespace dae
 
 	private:
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
-		Transform m_transform{};
-		std::shared_ptr<Texture2D> m_texture{};
 	};
 
-	
-	inline void GameObject::AddComponent(std::shared_ptr<BaseComponent> component)
+	template<typename T>
+	inline void GameObject::AddComponent(std::shared_ptr<T> component)
 	{
+		for (auto comp : m_pComponents)
+		{
+			if (typeid(*comp) == typeid(*component))
+			{
+				return;
+			}
+		}
 		m_pComponents.push_back(component);
 	}
 
-	inline void GameObject::RemoveComponent(std::shared_ptr<BaseComponent> component)
+	template<typename T>
+	inline void GameObject::RemoveComponent()
 	{
-		m_pComponents.erase(std::remove(m_pComponents.begin(), m_pComponents.end(), component));
-	}
-
-	inline std::shared_ptr<BaseComponent> GameObject::GetComponent() const
-	{
-		if (m_pComponents.size() >= 1)
+		for (auto comp : m_pComponents)
 		{
-			return m_pComponents[0];
-		}
-		else
-		{
-			return nullptr;
+			if (typeid(*comp) == typeid(T))
+			{
+				m_pComponents.erase(std::remove(m_pComponents.begin(), m_pComponents.end(), comp));
+				return;
+			}
 		}
 	}
 
-	inline bool GameObject::HasAddedComponent()
+	template<typename T>
+	inline std::shared_ptr<T> GameObject::GetComponent() const
 	{
-		return m_pComponents.size() >= 1;
+		for (auto comp : m_pComponents)
+		{
+			if (typeid(*comp) == typeid(T))
+			{
+				return comp;
+			}
+		}
+		return nullptr;
+	}
+
+	template<typename T>
+	inline bool GameObject::HasAddedComponent() const
+	{
+		for (auto comp : m_pComponents)
+		{
+			if (typeid(*comp) == typeid(T))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }
