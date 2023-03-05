@@ -15,7 +15,7 @@ namespace dae
 		void Render() const override;
 		void Update(const float dt) override;
 
-		TextureComponent(const std::string filename, float xPos, float yPos);
+		TextureComponent(const std::string filename, float xPos, float yPos, std::shared_ptr<GameObject> pOwner);
 		TextureComponent() = default;
 		virtual ~TextureComponent() = default;
 		TextureComponent(const TextureComponent& other) = delete;

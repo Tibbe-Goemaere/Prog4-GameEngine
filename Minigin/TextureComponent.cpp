@@ -6,8 +6,8 @@
 #include "Texture2D.h"
 #include "ResourceManager.h"
 
-dae::TextureComponent::TextureComponent(const std::string filename, float xPos, float yPos)
-	:m_pTexture{ ResourceManager::GetInstance().LoadTexture(filename) }
+dae::TextureComponent::TextureComponent(const std::string filename, float xPos, float yPos, std::shared_ptr<GameObject>pOwner)
+	:BaseComponent(pOwner), m_pTexture{ ResourceManager::GetInstance().LoadTexture(filename) }
 { 
 	m_transform.SetPosition(xPos,yPos,0.0f);
 }

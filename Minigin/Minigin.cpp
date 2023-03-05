@@ -79,6 +79,8 @@ dae::Minigin::~Minigin()
 void dae::Minigin::Run(const std::function<void()>& load)
 {
 	load();
+	const float targetFps{144.f};
+	 float maxWaitTime{ 1000.f / targetFps };
 
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
@@ -86,6 +88,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	auto lastTime = std::chrono::high_resolution_clock::now();
 	bool doContinue = true;
+
 	while (doContinue)
 	{
 		const auto currentTime = std::chrono::high_resolution_clock::now();
@@ -95,5 +98,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		sceneManager.Update(deltaTime);
 		renderer.Render();
 		lastTime = currentTime;
+
+		std::this_thread::sleep_for(currentTime + std::chrono::milliseconds(static_cast<int>(maxWaitTime)) - std::chrono::high_resolution_clock::now());
 	}
 }
