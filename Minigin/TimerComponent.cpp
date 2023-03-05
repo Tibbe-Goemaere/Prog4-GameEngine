@@ -4,6 +4,8 @@
 dae::TimerComponent::TimerComponent( std::shared_ptr<Font> font, std::shared_ptr<GameObject> pOwner)
 	:TextComponent{"FPS 0000",font,0,0,pOwner}
 	,m_TimePassed{0}
+	,m_FpsShowInterval{1}
+	,m_Ticks{0}
 {	
 }
 
@@ -11,15 +13,16 @@ void dae::TimerComponent::Update(const float dt)
 {
 	TextComponent::Update(dt);
 	m_TimePassed += dt;
-	const int fpsShowInterval{ 1 };
-	if (m_TimePassed >= fpsShowInterval)
+	++m_Ticks;
+	if (m_TimePassed >= m_FpsShowInterval)
 	{
-		const float fps{ 1.f / dt };
+		const float fps{ 1.f / (m_TimePassed/m_Ticks)};
 		const int fpsRounded{ static_cast<int>(roundf(fps)) };
 		std::string text{ "FPS " };
 		text += std::to_string(fpsRounded);
 		TextComponent::SetText(text);
 		m_TimePassed = 0;
+		m_Ticks = 0;
 	}
 	
 }

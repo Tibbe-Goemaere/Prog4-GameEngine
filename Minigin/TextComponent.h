@@ -21,7 +21,7 @@ namespace dae
 
 		TextComponent(const std::string& text, std::shared_ptr<Font> font, float xPos, float yPos, std::shared_ptr<GameObject> pOwner);
 		TextComponent() = default;
-		virtual ~TextComponent() = default;
+		~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;
 		TextComponent& operator=(const TextComponent& other) = delete;

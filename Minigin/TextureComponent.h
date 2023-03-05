@@ -17,7 +17,7 @@ namespace dae
 
 		TextureComponent(const std::string filename, float xPos, float yPos, std::shared_ptr<GameObject> pOwner);
 		TextureComponent() = default;
-		virtual ~TextureComponent() = default;
+		~TextureComponent() = default;
 		TextureComponent(const TextureComponent& other) = delete;
 		TextureComponent(TextureComponent&& other) = delete;
 		TextureComponent& operator=(const TextureComponent& other) = delete;

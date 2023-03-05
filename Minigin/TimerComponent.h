@@ -9,13 +9,15 @@ namespace dae
 
 		TimerComponent( std::shared_ptr<Font> font, std::shared_ptr<GameObject>);
 		TimerComponent() = default;
-		virtual ~TimerComponent() = default;
+		~TimerComponent() = default;
 		TimerComponent(const TimerComponent& other) = delete;
 		TimerComponent(TimerComponent&& other) = delete;
 		TimerComponent& operator=(const TimerComponent& other) = delete;
 		TimerComponent& operator=(TimerComponent&& other) = delete;
 	private:
 		float m_TimePassed;
+		const float m_FpsShowInterval;
+		int m_Ticks;
 	};
 }
 
