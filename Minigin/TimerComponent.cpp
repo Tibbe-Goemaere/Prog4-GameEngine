@@ -1,8 +1,8 @@
 #include "TimerComponent.h"
 #include <cmath>
 
-dae::TimerComponent::TimerComponent( std::shared_ptr<Font> font, std::shared_ptr<GameObject> pOwner)
-	:TextComponent{"FPS 0000",font,0,0,pOwner}
+dae::TimerComponent::TimerComponent(std::shared_ptr<GameObject> pOwner)
+	:TextComponent{pOwner}
 	,m_TimePassed{0}
 	,m_FpsShowInterval{1}
 	,m_Ticks{0}

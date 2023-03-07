@@ -6,16 +6,15 @@
 
 namespace dae
 {
-	class Texture2D;
 	class BaseComponent;
 	
-	class GameObject final 
+	class GameObject final : public std::enable_shared_from_this<GameObject>
 	{
 	public:
 		virtual void Update(const float dt);
 		virtual void Render() const;
 
-		template<typename T> void AddComponent(std::shared_ptr<T> component);
+		template<typename T, typename... Args>  std::shared_ptr<T> AddComponent(Args&&... arguments);
 
 		template<typename T> void RemoveComponent();
 
@@ -34,17 +33,20 @@ namespace dae
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
 	};
 
-	template<typename T>
-	inline void GameObject::AddComponent(std::shared_ptr<T> component)
+	template<typename T, typename... Args>
+	std::shared_ptr<T> GameObject::AddComponent(Args&&... arguments)
 	{
+		auto pComponent = std::make_shared<T>(std::forward<Args>(arguments)...);
+
 		for (auto comp : m_pComponents)
 		{
-			if (typeid(*comp) == typeid(*component))
+			if (typeid(*comp) == typeid(*pComponent))
 			{
-				return;
+				return nullptr;
 			}
 		}
-		m_pComponents.push_back(component);
+		m_pComponents.push_back(pComponent);
+		return pComponent;
 	}
 
 	template<typename T>

@@ -7,7 +7,7 @@ namespace dae
 	public:
 		void Update(const float dt) override;
 
-		TimerComponent( std::shared_ptr<Font> font, std::shared_ptr<GameObject>);
+		TimerComponent(std::shared_ptr<GameObject>);
 		TimerComponent() = default;
 		~TimerComponent() = default;
 		TimerComponent(const TimerComponent& other) = delete;

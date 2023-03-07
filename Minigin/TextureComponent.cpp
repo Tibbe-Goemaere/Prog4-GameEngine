@@ -6,10 +6,9 @@
 #include "Texture2D.h"
 #include "ResourceManager.h"
 
-dae::TextureComponent::TextureComponent(const std::string filename, float xPos, float yPos, std::shared_ptr<GameObject>pOwner)
-	:BaseComponent(pOwner), m_pTexture{ ResourceManager::GetInstance().LoadTexture(filename) }
+dae::TextureComponent::TextureComponent(std::shared_ptr<GameObject>pOwner)
+	:BaseComponent(pOwner)
 { 
-	m_transform.SetPosition(xPos,yPos,0.0f);
 }
 
 
@@ -17,7 +16,7 @@ void dae::TextureComponent::Render() const
 {
 	if (m_pTexture != nullptr)
 	{
-		const auto& pos = m_transform.GetPosition();
+		const auto& pos = m_Transform.GetPosition();
 		Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y);
 	}
 }
@@ -26,4 +25,12 @@ void dae::TextureComponent::Update(const float)
 {
 }
 
+void dae::TextureComponent::SetTexture(const std::string& filename)
+{
+	m_pTexture = ResourceManager::GetInstance().LoadTexture(filename);
+}
 
+void dae::TextureComponent::SetPosition(float x, float y)
+{
+	m_Transform.SetPosition(x, y, 0.0f);
+}
