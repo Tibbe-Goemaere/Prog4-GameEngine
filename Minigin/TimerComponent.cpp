@@ -3,8 +3,8 @@
 
 dae::TimerComponent::TimerComponent(std::shared_ptr<GameObject> pOwner)
 	:TextComponent{pOwner}
-	,m_TimePassed{0}
-	,m_FpsShowInterval{1}
+	, m_FpsShowInterval{ 1 }
+	,m_TimePassed{1.f}
 	,m_Ticks{0}
 {	
 }

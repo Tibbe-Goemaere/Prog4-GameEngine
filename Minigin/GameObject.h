@@ -29,8 +29,23 @@ namespace dae
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
+		std::shared_ptr<GameObject> GetParent();
+		void SetParent(std::shared_ptr<dae::GameObject> parent);
+		int GetChildCount() const;
+
+		std::shared_ptr<GameObject> GetChildAt(const int idx);
+		void AddChild(std::shared_ptr<dae::GameObject> pChild);
+		void RemoveChild(std::shared_ptr<dae::GameObject> pChild);
+
+		const Transform& GetTransform() const;
+
 	private:
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
+
+		std::shared_ptr<GameObject> m_pParent;
+		std::vector<std::shared_ptr<GameObject>> m_pChildren;
+
+		std::unique_ptr<Transform> m_pTransform;
 	};
 
 	template<typename T, typename... Args>
@@ -65,7 +80,7 @@ namespace dae
 	template<typename T>
 	inline std::shared_ptr<T> GameObject::GetComponent() const
 	{
-		for (auto comp : m_pComponents)
+		for (const auto& comp : m_pComponents)
 		{
 			if (typeid(*comp) == typeid(T))
 			{
