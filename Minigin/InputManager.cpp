@@ -1,6 +1,6 @@
 #include <SDL.h>
 #include "InputManager.h"
-#include "imgui_impl_sdl2.h"
+#include "ImGui/imgui_impl_sdl2.h"
 
 bool dae::InputManager::ProcessInput()
 {
