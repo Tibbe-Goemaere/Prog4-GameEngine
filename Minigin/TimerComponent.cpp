@@ -1,7 +1,7 @@
 #include "TimerComponent.h"
 #include <cmath>
 
-dae::TimerComponent::TimerComponent(std::shared_ptr<GameObject> pOwner)
+dae::TimerComponent::TimerComponent(std::weak_ptr<GameObject> pOwner)
 	:TextComponent{pOwner}
 	, m_FpsShowInterval{ 1 }
 	,m_TimePassed{1.f}

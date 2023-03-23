@@ -19,7 +19,7 @@ namespace dae
 		void SetFont(const std::shared_ptr<Font> font);
 		void SetPosition(float x, float y);
 
-		TextComponent(std::shared_ptr<GameObject> pOwner);
+		TextComponent(std::weak_ptr<GameObject> pOwner);
 		TextComponent() = default;
 		~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;

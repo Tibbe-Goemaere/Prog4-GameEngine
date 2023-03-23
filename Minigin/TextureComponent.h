@@ -9,6 +9,7 @@ namespace dae
 {
 	class Font;
 	class Texture2D;
+
 	class TextureComponent final : public BaseComponent
 	{
 	public:
@@ -18,7 +19,7 @@ namespace dae
 		void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
 
-		TextureComponent(std::shared_ptr<GameObject> pOwner);
+		TextureComponent(std::weak_ptr<GameObject> pOwner);
 		~TextureComponent() = default;
 		TextureComponent(const TextureComponent& other) = delete;
 		TextureComponent(TextureComponent&& other) = delete;

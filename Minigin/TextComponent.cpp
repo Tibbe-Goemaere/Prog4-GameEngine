@@ -5,7 +5,7 @@
 #include "Font.h"
 #include "Texture2D.h"
 
-dae::TextComponent::TextComponent(std::shared_ptr<GameObject> pOwner)
+dae::TextComponent::TextComponent(std::weak_ptr<GameObject> pOwner)
 	:BaseComponent(pOwner), m_needsUpdate(true), m_textTexture(nullptr)
 { 
 }

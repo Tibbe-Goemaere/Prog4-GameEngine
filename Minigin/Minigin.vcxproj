@@ -179,6 +179,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ImGui\imconfig.h" />
@@ -201,9 +203,10 @@
     <ClInclude Include="TextureComponent.h" />
     <ClInclude Include="TimerComponent.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="TrashTheCacheGraph.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
@@ -225,7 +228,6 @@
     <ClCompile Include="TextureComponent.cpp" />
     <ClCompile Include="TimerComponent.cpp" />
     <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="TrashTheCacheGraph.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

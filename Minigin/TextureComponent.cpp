@@ -6,7 +6,7 @@
 #include "Texture2D.h"
 #include "ResourceManager.h"
 
-dae::TextureComponent::TextureComponent(std::shared_ptr<GameObject>pOwner)
+dae::TextureComponent::TextureComponent(std::weak_ptr<GameObject>pOwner)
 	:BaseComponent(pOwner)
 { 
 }
